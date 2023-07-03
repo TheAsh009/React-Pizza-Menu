@@ -84,18 +84,24 @@ const Menu = function () {
         price="10"
       /> */}
       {numOfPizza > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((el) => (
-            <Pizza
-              key={+new Date() + el.name}
-              name={el.name}
-              photoName={el.photoName}
-              ingridients={el.ingredients}
-              price={el.price}
-              soldout={el.soldOut}
-            />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from.All from
+            our stone oven, all organic ,all delicios
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((el) => (
+              <Pizza
+                key={+new Date() + el.name}
+                name={el.name}
+                photoName={el.photoName}
+                ingridients={el.ingredients}
+                price={el.price}
+                soldout={el.soldOut}
+              />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We'r e still working on our menu. Please come back later</p>
       )}
@@ -105,13 +111,15 @@ const Menu = function () {
 
 function Pizza(props) {
   console.log(props);
-  if (props.soldout) return null;
+  // if (props.soldout) return null;
+
   return (
-    <li className="pizza">
+    <li className={`pizza ${props.soldout ? "sold-out" : ""}`}>
       <img src={props.photoName} alt={props.name} />
       <h3>{props.name}</h3>
       <p>{props.ingridients}</p>
-      <p>{props.price}$</p>
+
+      <span>{props.soldout ? "SOLD OUT" : props.price}$</span>
     </li>
   );
 }
